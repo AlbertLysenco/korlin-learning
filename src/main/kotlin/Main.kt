@@ -28,7 +28,19 @@ fun main(args: Array<String>) {
         else -> ""
     }
 
-    val healthStatus = when(healthPoints) {
+
+
+    println(faction)
+    println(formatHealthStatus(healthPoints, isBlessed))
+
+
+    println(experiencePoints)
+    println(playerName)
+    println(playerName.reversed())
+}
+
+private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) : String {
+    return when(healthPoints) {
         100 -> "is in excellent condition!"
         in 90..99 -> "has a few scratches"
         in 75..89 -> if(isBlessed) {
@@ -39,12 +51,4 @@ fun main(args: Array<String>) {
         in 15..74 -> "looks pretty hurt"
         else -> "is in awful condition!"
     }
-
-    println(faction)
-    println(healthStatus)
-
-
-    println(experiencePoints)
-    println(playerName)
-    println(playerName.reversed())
 }
