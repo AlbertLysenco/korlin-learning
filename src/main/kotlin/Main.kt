@@ -13,6 +13,7 @@ fun main(args: Array<String>) {
     val tavernMasterSecondQuestion = "Замечательно!"
     val estragonAnswer = "Нет, - отвечает $playerName, - у меня нет скакуна. Но у меня есть пятьдесят монет, и я хочу выпить"
 
+
     if(healthPoints == 100) {
         println("$playerName is in excellent condition!")
     } else {
@@ -27,16 +28,20 @@ fun main(args: Array<String>) {
         "human" -> "Free People of the Rolling Hills"
         else -> ""
     }
+    val auraColor = auraColor(isBlessed, healthPoints, false)
+    val healthStatus = formatHealthStatus(healthPoints, isBlessed)
+    prinPlayerStatus(auraColor, isBlessed, playerName, healthStatus)
+}
 
-
-
-    println(faction)
-    println(formatHealthStatus(healthPoints, isBlessed))
-
-
-    println(experiencePoints)
-    println(playerName)
-    println(playerName.reversed())
+private fun prinPlayerStatus(
+    auraColor: String,
+    isBlessed: Boolean,
+    playerName: String,
+    healthStatus: String
+) {
+    println("(Aura: $auraColor) (Blessed: ${if (isBlessed) "YSE" else "NO"})")
+    println("$playerName $healthStatus")
+    castFireBall()
 }
 
 private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) : String {
@@ -51,4 +56,13 @@ private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) : String {
         in 15..74 -> "looks pretty hurt"
         else -> "is in awful condition!"
     }
+}
+
+private fun auraColor(isBlessed: Boolean, healthPoints: Int, isImmortal: Boolean) : String {
+    val auraVisible = isBlessed && healthPoints > 50 || isImmortal
+    return if(auraVisible) "GREEN" else "NONE"
+}
+
+private fun castFireBall(numFireballs: Int = 2) {
+    println("A glass of Fireball springs into existence. (x$numFireballs)")
 }
